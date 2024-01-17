@@ -1,5 +1,6 @@
 package com.example.latihanfragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -54,6 +55,12 @@ class DetailCategoryFragment : Fragment() {
 
             val fragmentManager = childFragmentManager
             optionDialogFragment.show(fragmentManager, OptionDialogFragment::class.java.simpleName)
+        }
+
+        //PROFILE
+        btnProfile.setOnClickListener{
+            val intent = Intent(requireActivity(), ProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 
