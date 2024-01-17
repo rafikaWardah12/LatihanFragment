@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 
 class DetailCategoryFragment : Fragment() {
 
@@ -16,13 +17,14 @@ class DetailCategoryFragment : Fragment() {
     private lateinit var btnShowDialog: Button
 
     var description: String? = null
+
     companion object {
         var EXTRA_NAME = "extra_name"
         var EXTRA_DESCRIPTION = "extra_description"
     }
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail_category, container, false)
@@ -45,8 +47,22 @@ class DetailCategoryFragment : Fragment() {
             tvCategoryName.text = categoryName
             tvCategoryDescription.text = description
         }
+
+        //DIALOG
+        btnShowDialog.setOnClickListener {
+            val optionDialogFragment = OptionDialogFragment()
+
+            val fragmentManager = childFragmentManager
+            optionDialogFragment.show(fragmentManager, OptionDialogFragment::class.java.simpleName)
+        }
     }
 
-
+    //DIALOG
+    internal var optionDialogListener: OptionDialogFragment.OnOptionDialogListener =
+        object : OptionDialogFragment.OnOptionDialogListener {
+            override fun onOptionChosen(text: String?) {
+                Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT).show()
+            }
+        }
 
 }
